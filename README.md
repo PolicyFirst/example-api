@@ -7,7 +7,7 @@ Example Text Api
 	- Users can create/edit/delete their text posts
 	- Anyone can view text posts
 
-Hosted at: jts-example-app.herokuapp.com/
+Hosted at: https://jts-example-app.herokuapp.com/
 
 Endpoints:
 
