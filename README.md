@@ -10,11 +10,17 @@ Example Text Api
 Hosted at: https://jts-example-app.herokuapp.com/
 
 Endpoints:
+
 	- GET, POST /users
+	
 	- POST /users/login
+	
 	- GET, PUT, DELETE /user/{user_id}
+	
 	- GET /user/{user_id}/posts
+	
 	- GET, POST /posts
+	
 	- GET, PUT, DELETE /posts/{id}
 
 
