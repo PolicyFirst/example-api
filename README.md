@@ -45,7 +45,8 @@ Full API Definition:
 	- see Swagger_API_definitions.yaml file
 
 
-Next Steps: 
+Next Steps:
+
 	- More Robust Serialization 
 	- Response Pagination 
 	- Caching 
@@ -56,6 +57,7 @@ Next Steps:
 Ruby version: 2.6.6
 
 System dependencies:
+
 	- rspec
 	- JWT
 	- bcrypt
