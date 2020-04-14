@@ -1,0 +1,221 @@
+swagger: '2.0'
+info:
+  title: Example Text API
+  description: A simple API used to create and consume text posts
+  termsOfService: terms
+  contact:
+    name: Jordan
+    email: jt75smith@gmail.com
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+schemes: 
+  - http
+host: temp.com
+paths:
+  /users:
+    get:
+      summary: Gets some Users
+      description: Returns a list containing all Users.
+      responses:
+        200:
+          description: A list of Users
+          schema:
+            $ref: '#/definitions/Users'
+    post:
+      summary: Create a new User 
+      description: Adds a new User into the list with the given parameters.
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: user
+          in: body
+          description: The User to be created.
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        201:
+          description: sends a Json body containing Auth Header Token
+        409:
+          description: A User with this id already exists.
+        422:
+          description: Invalid arguments
+  /users/{id}:
+    get:
+      summary: Get a User by id
+      description: Returns a User by the corresponding id.
+      produces: application/json
+      parameters:
+        - id: id
+          in: path
+          required: true
+          description: The User's id
+          type: integer
+      responses:
+        200:
+          description: User with given id.
+          schema:
+            $ref: '#/definitions/User'
+        404:
+          description: Not Found
+    put:
+      summary: Update a User 
+      description: Updates a user with the given parameters if authenticated by Header Token.
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: user
+          in: body
+          description: The User to be created.
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        201:
+          description: User Updated. 
+        409:
+          description: A User with this email already exists.
+        422:
+          description: Invalid arguments
+        404:
+          description: Not Found
+  /users/login:
+    post:
+      summary: Login as a User 
+      description: Sends Auth token for user credentials
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: user
+          in: body
+          description: The User Logging in.
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        201:
+          description: sends a Json body containing Auth Header Token
+        422:
+          description: Invalid arguments
+  /posts:
+    get:
+      summary: Get some Posts
+      description: Returns a list containing all Posts.
+      produces: application/json
+      responses:
+        200:
+          description: A list of Posts
+          schema:
+            $ref: '#/definitions/Posts'
+    post:
+      summary: Create a new post 
+      description: Creates a new belonging to the user from the Authorization Header Token
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: post
+          in: body
+          description: The Post to be created.
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        201:
+          description: New Post added to list of Posts.
+        401:
+          description: Not Authorized / please Login
+  /posts/{id}:
+    get:
+      summary: Get a Post by id
+      description: Returns a Post by the corresponding id 
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The posts's id
+          type: integer
+      responses:
+        200:
+          description: Post with given id.
+          schema:
+            $ref: '#/definitions/Post'
+        404:
+          description: Not Found
+    put:
+      summary: Update a post 
+      description: Updates a post belonging to the user from the Authorization Header Token
+      consumes: application/json
+      produces: application/json
+      parameters:
+        - name: post
+          in: body
+          description: The Post to be created.
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        201:
+          description: Post updated.
+        401:
+          description: Not Authorized / please Login
+        404:
+          description: Not Found
+    destroy:
+      summary: Delete a post
+      description: Deletes a post belonging to the user from the Authorization Header Token
+      consumes: application/json
+      parameters:
+        - name: post
+          in: body
+          description: The Post to be deleted.
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        201:
+          description: Post deleted.
+        401:
+          description: Not Authorized / please Login
+        404:
+          description: Not Found
+  /users/{user_id}/posts/:
+    get:
+      summary: Get a list of Post by a User.
+      description: Returns a list of all Posts authored by a User with the given user_id.
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: The User's id
+          type: string
+      responses:
+        200:
+          description: A list of Posts authored by a User.
+          schema:
+            $ref: '#/definitions/posts'
+        404:
+          description: User Not Found.
+definitions:
+  Post:
+    required:
+      - user
+      - text
+    properties:
+      id:
+        type: integer
+      text:
+        type: string
+      user:
+         $ref: '#/definitions/User'
+  Posts:
+    type: array
+    items:
+      $ref: '#/definitions/Post'
+  User:
+    required:
+      - password
+      - email
+    properties:
+      password:
+        type: string
+      email:
+        type: string
+  Users:
+    type: array
+    items:
+      $ref: '#/definitions/User'
