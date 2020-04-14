@@ -3,9 +3,48 @@
 Example Text Api
 	
 	- uses Rails API mode to create a simple API with 'users' and 'posts'
+	- Supports multiple Users signing up (POST /users) and logging in with JWT auth (POST /users/login)
+	- Users can create/edit/delete their text posts
+	- Anyone can view text posts
 
-API Definition:
-	- Swagger.yaml	
+Hosted at: https://jts-example-app.herokuapp.com/
+
+Endpoints:
+	- GET, POST /users
+	- POST /users/login
+	- GET, PUT, DELETE /user/{user_id}
+	- GET /user/{user_id}/posts
+	- GET, POST /posts
+	- GET, PUT, DELETE /posts/{id}
+
+
+Json Objects Examples:
+
+	{
+		"user" {
+			"email": "luke@rebel.base",
+			"password": "ch0s3n0n3"
+		}
+	}
+
+	{
+		"post" {
+			"text": "Blue Milk",
+			"user_id": "1"
+		}
+	}
+
+
+Full API Definition:
+	- see Swagger_API_definitions.yaml file
+
+
+Next Steps: 
+	- More Robust Serialization 
+	- Response Pagination 
+	- Caching 
+	- filtering / sorting (especially w/ a more complex schema) 
+	- Throttling and RackAttack protections
 
 
 Ruby version: 2.6.6
