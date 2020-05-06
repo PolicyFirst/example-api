@@ -49,7 +49,7 @@ Next Steps:
 
 	- More Robust Serialization 
 	- Response Pagination 
-	- Caching 
+	- Caching / optimization
 	- filtering / sorting (especially w/ a more complex schema) 
 	- Throttling and RackAttack protections
 
